@@ -1,4 +1,15 @@
 trigger:
+- task: PowerShellOnTargetMachines@3
+  inputs:
+    Machines: '10.8.163.63'
+    UserName: 'ambientesbc\msrpjel1'
+    UserPassword: '$(password-value)'
+    InlineScript: |
+      # Write your powershell commands here.
+      
+      Write-Output "Hello World"
+    failOnStderr: true
+    WorkingDirectory: 'D:\Servidores'
 - master
 - releases/*
 
