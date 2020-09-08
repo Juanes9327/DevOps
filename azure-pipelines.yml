@@ -1,3 +1,4 @@
+
 - task: PowerShellOnTargetMachines@3
   inputs:
     Machines: '10.8.163.63'
@@ -12,11 +13,9 @@
 - master
 - releases/*
 
-resources:
+- resources:
   repositories:
   - repository: AzureDevOps
     type: git
     endpoint: AzureDevOps
     name: AzureDevOps/AzureDevOps
-
-
