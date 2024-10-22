@@ -3,7 +3,7 @@
   hosts: all
   become: true
   tasks:
-    - name: Mensaje
-      ansible.builtin.package:
-        name: '*'
+    - name: Upgrade all packages
+      ansible.builtin.dnf:
+        name: "*"
         state: latest
