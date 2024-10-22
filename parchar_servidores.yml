@@ -1,3 +1,4 @@
+---
 - name: parchar servidores Linux
   hosts: all
   tasks:
