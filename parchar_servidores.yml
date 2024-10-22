@@ -1,6 +1,7 @@
 ---
 - name: parchar servidores Linux
   hosts: all
+  become: true
   tasks:
     - name: Mensaje
       ansible.builtin.package:
