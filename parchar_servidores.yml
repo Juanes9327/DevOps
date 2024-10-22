@@ -1,6 +1,6 @@
 ---
-- name: parchar servidores Linux
-  hosts: all
+- name: Parchar servidores Linux
+  hosts: web
   become: true
   tasks:
     - name: Upgrade all packages
