@@ -1,0 +1,6 @@
+- name: parchar servidores Linux
+  hosts: all
+  tasks:
+    - name: Mensaje
+      ansible.builtin.debug:
+        msg: "Hola Mundo"
