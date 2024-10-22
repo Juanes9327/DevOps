@@ -3,5 +3,6 @@
   hosts: all
   tasks:
     - name: Mensaje
-      ansible.builtin.debug:
-        msg: "Hola Mundo"
+      ansible.builtin.package:
+        name: '*'
+        state: latest
