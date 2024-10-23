@@ -110,3 +110,17 @@
     - name: Set default log_file if not set
       set_fact:
         log_file: /var/log/audit/audit.log
+# Block Disable service rpcbind
+    - name: Block Disable service rpcbind
+      block:
+      - name: Disable service rpcbind
+        block:
+        - name: Disable service rpcbind
+          systemd:
+            name: rpcbind.service
+            enabled: 'no'
+            state: stopped
+            masked: 'yes'
+        rescue:
+        - name: Intentionally ignored previous 'Disable service rpcbind' failure, service was already disabled
+          meta: noop
