@@ -110,17 +110,14 @@
     - name: Set default log_file if not set
       set_fact:
         log_file: /var/log/audit/audit.log
-# Block Disable service rpcbind
-    - name: Block Disable service rpcbind
-      block:
-      - name: Disable service rpcbind
-        block:
-        - name: Disable service rpcbind
-          systemd:
-            name: rpcbind.service
-            enabled: 'no'
-            state: stopped
-            masked: 'yes'
-        rescue:
-        - name: Intentionally ignored previous 'Disable service rpcbind' failure, service was already disabled
-          meta: noop
+# Ensure telnet-server is removed
+    - name: Ensure telnet-server is removed
+      package:
+        name: telnet-server
+        state: absent
+# Ensure interactive users have a home directory exists
+    - name: Ensure interactive users have a home directory exists
+      ansible.builtin.user:
+        name: '{{ item.key }}'
+        create_home: true
+      loop: '{{ local_users }}'
