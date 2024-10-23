@@ -1,0 +1,10 @@
+- name: CIS Benchmark For RHEL9
+  hosts: web 
+  gather_facts: no
+  tasks:
+    - name: Test for existence /etc/ssh/sshd_config
+      stat:
+        path: /etc/ssh/sshd_config
+      register: file_exists
+      tags:
+      - low_complexity
