@@ -17,19 +17,19 @@
           create: false
           regexp: (?i)^\s*{{ "PermitRootLogin"| regex_escape }}\s+
           state: absent
-      - name: Check if /etc/ssh/sshd_config.d exists
+      - name: Check if /etc/ssh/sshd_config exists
         stat:
-          path: /etc/ssh/sshd_config.d
+          path: /etc/ssh/sshd_config
         register: _etc_ssh_sshd_config_d_exists
-      - name: Check if the parameter PermitRootLogin is present in /etc/ssh/sshd_config.d
+      - name: Check if the parameter PermitRootLogin is present in /etc/ssh/sshd_config
         find:
-          paths: /etc/ssh/sshd_config.d
+          paths: /etc/ssh/sshd_config
           recurse: 'yes'
           follow: 'no'
           contains: (?i)^\s*{{ "PermitRootLogin"| regex_escape }}\s+
         register: _etc_ssh_sshd_config_d_has_parameter
         when: _etc_ssh_sshd_config_d_exists.stat.isdir is defined and _etc_ssh_sshd_config_d_exists.stat.isdir
-      - name: Remove parameter from files in /etc/ssh/sshd_config.d
+      - name: Remove parameter from files in /etc/ssh/sshd_config
         lineinfile:
           path: '{{ item.path }}'
           create: false
@@ -37,9 +37,9 @@
           state: absent
         with_items: '{{ _etc_ssh_sshd_config_d_has_parameter.files }}'
         when: _etc_ssh_sshd_config_d_has_parameter.matched
-      - name: Insert correct line to /etc/ssh/sshd_config.d/00-complianceascode-hardening.conf
+      - name: Insert correct line to /etc/ssh/sshd_config/00-complianceascode-hardening.conf
         lineinfile:
-          path: /etc/ssh/sshd_config.d/00-complianceascode-hardening.conf
+          path: /etc/ssh/sshd_config/00-complianceascode-hardening.conf
           create: true
           regexp: (?i)^\s*{{ "PermitRootLogin"| regex_escape }}\s+
           line: PermitRootLogin no
