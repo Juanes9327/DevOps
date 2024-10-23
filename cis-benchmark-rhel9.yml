@@ -4,6 +4,7 @@
   gather_facts: no
   vars:
     var_accounts_maximum_age_login_defs: 60
+    sshd_max_auth_tries_value: 3
   tasks:
 # Test for existence /etc/ssh/sshd_config
     - name: Test for existence /etc/ssh/sshd_config
