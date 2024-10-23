@@ -63,3 +63,16 @@
       package:
         name: rsyslog
         state: present
+    - name: Enable service rsyslog
+      block:
+      - name: Gather the package facts
+        package_facts:
+          manager: auto
+      - name: Enable service rsyslog
+        systemd:
+          name: rsyslog
+          enabled: 'yes'
+          state: started
+          masked: 'no'
+        when:
+        - '"rsyslog" in ansible_facts.packages'
